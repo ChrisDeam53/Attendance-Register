@@ -1,5 +1,5 @@
 <template>
-    <button class="smallButton"> {{buttonName}} </button>
+    <button class="smallButton">{{buttonName}}</button>
 </template>
 
 
@@ -26,6 +26,11 @@
 
 <script>
 export default {
-    buttonName: ''
-}
+    name: 'SmallButton',
+    props: {
+        buttonName: {
+            type: String
+        }
+    }
+  }
 </script>

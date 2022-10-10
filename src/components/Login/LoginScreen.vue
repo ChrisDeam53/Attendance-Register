@@ -1,6 +1,6 @@
 <template>
     <h1> Login Screen </h1>
-    <SmallButton v-bind:buttonName='LOGIN'>LOGIN</SmallButton>
+    <SmallButton buttonName="Login"></SmallButton>
 </template>
 
 <script>
@@ -12,11 +12,11 @@ export default {
             user: {
                 email: '',
                 password: ''
-            },
-            buttonName: 'Login!'
+            }
         };
     },
 
+    name: "LoginScreen",
     components: {
         SmallButton
     }
