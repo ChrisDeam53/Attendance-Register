@@ -1,8 +1,13 @@
-/* Use these global styles across the entire application. */
+<template>
+    <button class="smallButton"> {{buttonName}} </button>
+</template>
 
+
+<style>
+@import '../../../globals.css';
 
 .smallButton {
-	box-shadow:inset 0px 1px 0px 0px #dcecfb;
+    box-shadow:inset 0px 1px 0px 0px #dcecfb;
 	background:linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
 	background-color:#bddbfa;
 	border-radius:6px;
@@ -17,3 +22,10 @@
 	text-decoration:none;
 	text-shadow:0px 1px 0px #528ecc;
 }
+</style>
+
+<script>
+export default {
+    buttonName: ''
+}
+</script>

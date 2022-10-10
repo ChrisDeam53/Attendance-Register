@@ -16,6 +16,14 @@ Suggested IDE: VSCode
 
 npm install
 
+npm install 
+express
+sequelize
+mysql2
+body-parser
+cors
+mongoose
+
 # Compiles and hot-reloads for development
 
 npm run serve
