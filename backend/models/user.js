@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require("../database");
+const sequelize = require("../index");
 
 const User = sequelize.define('User', {
     // Model attributes are defined here
@@ -10,7 +10,21 @@ const User = sequelize.define('User', {
     lastName: {
         type: DataTypes.STRING
             // allowNull defaults to true
+    },
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    roleType: {
+        type: DataTypes.TINYINT,
+        defaultValue: 0
+            //Integers will represent role types, these will be decided later. Defaults to 0, (lowest level of access)
     }
+
 }, {
     // Other model options go here
 });
