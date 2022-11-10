@@ -19,10 +19,10 @@ npm install
 npm install 
 express
 sequelize
-mysql2
 body-parser
 cors
-mongoose
+sqlite3
+
 
 # Compiles and hot-reloads for development
 
