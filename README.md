@@ -26,9 +26,17 @@ sqlite3
 
 # Compiles and hot-reloads for development
 
-npm run serve
+If running front-end development and testing (Vue.js local server)
 
-# Compiles and minifies for production
+npm run serve (Runs the vue.js local server for front-end development)
+
+---------------------------------------------------------------------------
+
+If running the server as a whole (Node, Express, Vue.js)
+
+node server.js (Runs the node server)
+
+# Compiles and minifies for production/development
 
 npm run build
 
