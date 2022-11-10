@@ -21,16 +21,27 @@ const Group =
 const Attendance =
     require("./models/attendance");
 
-User.hasMany(Lesson);
-User.hasMany(Group);
-User.hasMany(Attendance);
+//Many groups in one module, one module per group
 Module.hasMany(Group);
-Module.hasMany(User);
+Group.hasOne(Module);
+
+//Many users in 
+Module.belongsToMany(User, { through: "User Modules" });
+User.belongsToMany(Module, { through: "User Modules" });
+
+//Array of Lessons in a group
 Lesson.hasOne(Group);
-Group.hasMany(User);
 Group.hasMany(Lesson);
-Attendance.hasMany(User);
-Attendance.hasOne(Lesson);
+
+//Array of groups in User, array of users in each group
+Group.belongsToMany(User, { through: "User Groups" });
+User.belongsToMany(Group, { through: "User Groups" });
+
+//Attendance Table
+Lesson.belongsToMany(User, { through: Attendance });
+User.belongsToMany(Lesson, { through: Attendance });
+
+
 
 
 
