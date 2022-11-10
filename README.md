@@ -36,7 +36,7 @@ If running the server as a whole (Node, Express, Vue.js)
 
 node server.js (Runs the node server)
 
-# Compiles and minifies for production
+# Compiles and minifies for production/development
 
 npm run build
 
