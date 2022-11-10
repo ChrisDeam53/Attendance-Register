@@ -27,6 +27,7 @@ mongoose
 # Compiles and hot-reloads for development
 
 If running front-end development and testing (Vue.js local server)
+
 npm run serve (Runs the vue.js local server for front-end development)
 
 ---------------------------------------------------------------------------
