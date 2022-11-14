@@ -24,6 +24,7 @@ const Module = sequelize.define('Module', {
 
 }, {
     // Other model options go here
+    timestamps: false
 });
 
 

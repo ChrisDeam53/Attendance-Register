@@ -14,7 +14,8 @@ const Group = sequelize.define('Group', {
     }
     // allowNull defaults to true
 }, {
-    // Other model options go here
+    timestamps: false
+        // Other model options go here
 });
 
 

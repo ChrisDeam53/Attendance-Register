@@ -13,6 +13,7 @@ const Lesson = sequelize.define('Lesson', {
     },
 }, {
     // Other model options go here
+    timestamps: false
 });
 
 
