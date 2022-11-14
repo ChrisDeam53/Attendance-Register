@@ -1,10 +1,8 @@
 <template>
-    <h1> Login</h1>
-
     <form class="login">
-        <input type="text" placeholder="Username">
-        <input type="password" placeholder="Password">
-        <SmallButton buttonName="Login"></SmallButton>
+        <input type="text" placeholder="Username" required>
+        <input type="password" placeholder="Password" required>
+        <SmallButton @click="verifyUser" buttonName="Login"></SmallButton>
     </form>
 
 </template>
@@ -18,7 +16,7 @@
     box-sizing: border-box;
 }
 body{
-    background-color: #080710;
+    background-color:#1F2739;
 }
 .background{
     width: 430px;
@@ -78,7 +76,6 @@ form h3{
     line-height: 42px;
     text-align: center;
 }
-
 label{
     display: block;
     margin-top: 30px;
@@ -133,7 +130,7 @@ button{
   margin-right: 4px;
 }
 
-    </style>
+</style>
 
 <script>
 import SmallButton from '../PageButton/SmallButton.vue'
@@ -142,7 +139,7 @@ export default {
     data() {
         return {
             user: {
-                email: '',
+                username: '',
                 password: ''
             }
         };
@@ -151,6 +148,21 @@ export default {
     name: "LoginScreen",
     components: {
         SmallButton
+    },
+
+    methods: {
+        verifyUser() {
+            // Send the user object -> Backend -> Database
+            // Database -> Backend -> Return response
+            console.log("I've been pressed, yo!");
+            if(this.username == "Bob" && this.password == "qqq") {
+                console.log("You're logged in!");
+                <router-link to="/TableScreen"></router-link>
+            }
+            else {
+                console.log("Incorrect details added!");
+            }
+        }
     }
 };
 
