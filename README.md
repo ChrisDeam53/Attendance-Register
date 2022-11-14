@@ -22,7 +22,10 @@ sequelize
 body-parser
 cors
 sqlite3
-
+mocha
+chai
+chai-http
+--save-dev
 
 # Compiles and hot-reloads for development
 
