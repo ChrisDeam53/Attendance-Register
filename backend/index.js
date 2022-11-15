@@ -74,6 +74,17 @@ Student.hasOne(AcademicAdvisor);
 AcademicAdvisor.hasMany(Student);
 
 
+// const user1 = User.build({ firstName: "Mazen", lastName: "Omar", username: "mo190201", password: "test123" });
+// user1.save();
+// student1.save();
+// const student1 = Student.build({ User: { firstName: "Mazen", lastName: "Omar", username: "mo190201", password: "test123" } }, { include: [User] });
+// student1.save();
+// Student.upsert({
+//     id: 3,
+//     AcademicAdvisorId: 3,
+// });
+// //student1.set({ AcademicAdvisor: {} })
+
 
 sequelize
     .sync()
