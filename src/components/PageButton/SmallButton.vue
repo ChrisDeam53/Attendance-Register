@@ -6,7 +6,7 @@
 <style>
 @import '../../../globals.css';
 
-.smallButton {
+/* .smallButton {
     box-shadow:inset 0px 1px 0px 0px #dcecfb;
 	background:linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
 	background-color:#bddbfa;
@@ -21,7 +21,8 @@
 	padding:6px 24px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #528ecc;
-}
+} */
+
 </style>
 
 <script>

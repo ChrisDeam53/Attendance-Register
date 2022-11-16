@@ -1,20 +1,30 @@
 <template>
-    <Doughnut></Doughnut>   
+    <body>
+        <Doughnut></Doughnut>   
+    </body>  
 </template>
+
+<style>
+body
+{
+    padding-top: 250px;
+}
+</style>
   
 <script>
 
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    let vue_1 = require("vue");
-    let vue_chartjs_1 = require("vue-chartjs");
-    let chart_js_1 = require("chart.js");
-    chart_js_1.Chart.register(chart_js_1.Title, chart_js_1.Tooltip, chart_js_1.Legend, chart_js_1.ArcElement, chart_js_1.CategoryScale);
+    let vue = require("vue");
+    let vueChart = require("vue-chartjs");
+    let chartJs = require("chart.js");
 
-    exports.default = (0, vue_1.defineComponent)({
+    chartJs.Chart.register(chartJs.Title, chartJs.Tooltip, chartJs.Legend, chartJs.ArcElement, chartJs.CategoryScale);
+
+    exports.default = (0, vue.defineComponent)({
     name: 'DoughnutChart',
     components: {
-        Doughnut: vue_chartjs_1.Doughnut
+        Doughnut: vueChart.Doughnut
     },
     props: {
         chartId: {
@@ -57,7 +67,7 @@
             maintainAspectRatio: false
         };
         return function () {
-            return (0, vue_1.h)(vue_chartjs_1.Doughnut, {
+            return (0, vue.h)(vueChart.Doughnut, {
                 chartData: chartData,
                 chartOptions: chartOptions,
                 chartId: props.chartId,

@@ -1,12 +1,17 @@
 <template>
-    <form class="login">
+    <form class="login" @submit.prevent="verifyUser">
         <!-- <input type="text" placeholder="Username" required>
         <input type="password" placeholder="Password" required> -->
         <input v-model="enteredUsername" placeholder="Username" required>
         <input v-model="enteredPassword" placeholder="Password" required>
-        <SmallButton @click="verifyUser" buttonName="Login"></SmallButton>
-    </form>
 
+        <router-link to="{name: 'protected'}" custom v-slot="{ verifyUser }">
+            <SmallButton @click="verifyUser" role="link" buttonName="Login"></SmallButton>
+        </router-link>
+
+
+
+    </form>
 </template>
 
 <style media="screen">
@@ -142,15 +147,18 @@ button{
         setup() {
             const enteredUsername = ref("")
             const enteredPassword = ref("")
+            const isAuthenticated = ref(false)
 
             return {
                 enteredUsername,
-                enteredPassword
+                enteredPassword,
+                isAuthenticated
         }
         },
         mounted() {
             console.log(this.enteredUsername)
             console.log(this.enteredPassword)
+            console.log(this.isAuthenticated)
         },
         data() {
             return {
@@ -164,13 +172,14 @@ button{
             verifyUser() {
                 // Send the user object -> Backend -> Database
                 // Database -> Backend -> Return response
+                // TODO: AUTH USER AGAINST API HERE
                 console.log("I've been pressed, yo!");
-                if(this.enteredUsername == "Bob" && this.enteredPassword == "qqq") {
-                    console.log("You're logged in!");
-                    <router-link to="/TableScreen"></router-link>
+                if (this.enteredUsername == "aaa" && this.enteredPassword == "qqq") {
+                    console.log("LOGGED IN!");
+                    this.$router.push({name: 'home'});
                 }
                 else {
-                    console.log("Incorrect details added!");
+                    console.log("NOT CORRECT!");
                 }
             }
         }

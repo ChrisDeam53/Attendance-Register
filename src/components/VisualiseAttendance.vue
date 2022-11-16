@@ -3,6 +3,12 @@
 </template>
 
 <style>
+
+body
+{
+    background-color:#1F2739;
+}
+
 </style>
 
 <script>
