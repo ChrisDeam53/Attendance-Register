@@ -69,7 +69,19 @@ const routes = [
         alias: "/tableView",
         name: "tableView",
         component: () => import("../components/TableScreen")
-        },
+    },
+    {
+        path: "/pieView",
+        alias: "/piewView",
+        name: "pieView",
+        component: () => import("../components/VisualiseAttendance")
+    },
+    {
+        path: "/home",
+        alias: "/home",
+        name: "home",
+        component: () => import("../components/HomePage")
+    }
 ];
 
 const router = createRouter({

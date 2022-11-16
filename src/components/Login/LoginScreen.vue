@@ -1,7 +1,9 @@
 <template>
     <form class="login">
-        <input type="text" placeholder="Username" required>
-        <input type="password" placeholder="Password" required>
+        <!-- <input type="text" placeholder="Username" required>
+        <input type="password" placeholder="Password" required> -->
+        <input v-model="enteredUsername" placeholder="Username" required>
+        <input v-model="enteredPassword" placeholder="Password" required>
         <SmallButton @click="verifyUser" buttonName="Login"></SmallButton>
     </form>
 
@@ -133,37 +135,44 @@ button{
 </style>
 
 <script>
-import SmallButton from '../PageButton/SmallButton.vue'
+    import SmallButton from '../PageButton/SmallButton.vue'
+    import { ref } from 'vue'
 
-export default {
-    data() {
-        return {
-            user: {
-                username: '',
-                password: ''
-            }
-        };
-    },
+    export default {
+        setup() {
+            const enteredUsername = ref("")
+            const enteredPassword = ref("")
 
-    name: "LoginScreen",
-    components: {
-        SmallButton
-    },
-
-    methods: {
-        verifyUser() {
-            // Send the user object -> Backend -> Database
-            // Database -> Backend -> Return response
-            console.log("I've been pressed, yo!");
-            if(this.username == "Bob" && this.password == "qqq") {
-                console.log("You're logged in!");
-                <router-link to="/TableScreen"></router-link>
-            }
-            else {
-                console.log("Incorrect details added!");
+            return {
+                enteredUsername,
+                enteredPassword
+        }
+        },
+        mounted() {
+            console.log(this.enteredUsername)
+            console.log(this.enteredPassword)
+        },
+        data() {
+            return {
+            };
+        },
+        name: "LoginScreen",
+        components: {
+            SmallButton
+        },
+        methods: {
+            verifyUser() {
+                // Send the user object -> Backend -> Database
+                // Database -> Backend -> Return response
+                console.log("I've been pressed, yo!");
+                if(this.enteredUsername == "Bob" && this.enteredPassword == "qqq") {
+                    console.log("You're logged in!");
+                    <router-link to="/TableScreen"></router-link>
+                }
+                else {
+                    console.log("Incorrect details added!");
+                }
             }
         }
-    }
-};
-
+    };
 </script>

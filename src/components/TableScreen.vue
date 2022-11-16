@@ -162,16 +162,16 @@ h2 a {
 <script>
   // import LessonTableRow from "./AttendanceTable/LessonTableRow.vue"
 
-  export default {
-    data() {
-        return {
-            animals: []
-        };
-    },
-    name: "TableView",
-        components: {
-            // LessonTableRow
-        }
-}
+    export default {
+        data() {
+            return {
+                animals: []
+            };
+        },
+        name: "TableView",
+            components: {
+                // LessonTableRow
+            }
+    }
 
 </script>
