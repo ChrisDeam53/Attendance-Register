@@ -53,6 +53,15 @@ app.use('/tableView', urlencodedParser, (request, response) => {
   response.sendFile(path + "index.html");
 }); // If the URL has the right filepath, use the exported routed from this routing file
 
+// View Attendance Indicators [TESTING PURPOSES]
+app.use('/pieView', urlencodedParser, (request, response) => {
+  response.sendFile(path + "index.html");
+}); // If the URL has the right filepath, use the exported routed from this routing file
+
+// Home Page [TESTING PURPOSES]
+app.use('/home', urlencodedParser, (request, response) => {
+  response.sendFile(path + "index.html");
+}); // If the URL has the right filepath, use the exported routed from this routing file
 
 // Catch all route - If no route has been defined for a given path, execute this logic
 app.all('*', function(request, response) {
