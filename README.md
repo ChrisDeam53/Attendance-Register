@@ -22,7 +22,12 @@ sequelize
 body-parser
 cors
 sqlite3
-
+vue-router@4
+axios
+mocha
+chai
+chai-http
+--save-dev
 
 # Compiles and hot-reloads for development
 
