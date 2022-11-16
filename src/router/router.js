@@ -5,7 +5,7 @@ const routes = [
         path: "/",
         alias: "/loginScreen",
         name: "loginScreen",
-        meta: { requiredAuth: true},
+        meta: { requiredAuth: false},
         component: () => import("../components/Login/LoginScreen")
     },
     {

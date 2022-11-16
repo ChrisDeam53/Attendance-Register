@@ -1,8 +1,8 @@
 <template>
     <ul class="sidebar-menu">
                 <li></li>
-                <li><a href="#">Home Page</a></li>
-                <li><a href="#">Sign Out</a></li>
+                <li @click="aaa"><a href="#">Home Page</a></li>
+                <li @click="logout"><a href="#">Sign Out</a></li>
             </ul>
 </template>
 
@@ -66,6 +66,12 @@ export default {
         buttonName: {
             type: String
         }
-    }
+    },
+    methods: {
+            logout() {
+                console.log("PRESSED!")
+                this.$router.push({name: 'Home'})
+            }
+        }
 }
 </script>
