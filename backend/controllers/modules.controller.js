@@ -5,7 +5,7 @@ const modules = db.module;
 exports.findall = (req, res) => {
     // Validate request
 
-    // Create a 
+    // What functions do we have mazen, please explain :((
 }
 
 
