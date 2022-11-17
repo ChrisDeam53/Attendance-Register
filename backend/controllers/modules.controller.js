@@ -1,12 +1,13 @@
 const db = require("../models");
-const modules = db.modules
+const modules = db.module;
 
 //findall modules assigned to the user
 exports.findall = (req, res) => {
+    // Validate request
 
+    // Create a 
 }
-//
-//exports.
+
 
 
 

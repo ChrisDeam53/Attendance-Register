@@ -24,6 +24,7 @@ const urlencodedParser = bodyParser.urlencoded({ extended: true })
 
 //Route handles
 const login = require('./backend/routes/api/login')
+const modules = require('./backend/routes/api/modules')
 
 //
 //MIDDLEWARE REGISTRATION
@@ -43,11 +44,10 @@ app.use(cors(corsOptions));
 //Remember to include next() and the relevant argument for the callback if a given middleware layer doesn't conclude all the processing that needs to be done for that call
 
 //Login page
-app.use('/login', urlencodedParser, (request, response) => {
+app.use('/login', urlencodedParser, login); //"if the URI has the right filepath, use the exported routed from this routing file"
 
-  response.sendFile(path + "index.html");
-}); //"if the URI has the right filepath, use the exported routed from this routing file"
-
+//Modules page
+app.use('/modules', urlencodedParser, modules);
 
 //Catchall route - if no route has been defined for a given path, execute this logic
 app.all('*', function(request, response) {
