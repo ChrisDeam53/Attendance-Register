@@ -85,54 +85,97 @@ const AcademicAdvisees = sequelize.define('Academic Advisees', {}, { timestamps:
 module.exports = AcademicAdvisees;
 AcademicAdvisor.belongsToMany(Student, { through: AcademicAdvisees });
 
-function createDummyData() {
-    // student1.save();
+
+/**
+ * @brief Function that creates dummy data
+ * Do not call this function if the database is not created first( At the moment, if the database does not exist before this file is run, this will break)
+ * No Params and no Return
+ * @author Mazen
+ * 
+ */
+async function createDummyData() {
+    //Works to create a student and also their associated user. 
     const student1 = Student.build({ User: { firstName: "Mazen", lastName: "Omar", username: "mo190201", password: "test123" } }, { include: [User] });
     student1.save();
 
+
+    //Works to create a lecturer and their associated user. 
     const lecturer1 = Lecturer.build({
         User: { firstName: "Nathan", lastName: "Blakemore", username: "nb2948382", password: "test123" }
     }, { include: [User] });
-    // lecturer1.save();
-    // const advisorUser = User.build({ firstName: "Nathan", lastName: "Blakemore", username: "nb2948382", password: "test123" })
-    // advisorUser.save();
-    const advisor1 = AcademicAdvisor.build({
-        Lecturer: {
-            User: { firstName: "Nathan", lastName: "Blakemore", username: "nb2948382", password: "test123" }
-        }
-    }, { include: [User, Lecturer] });
-    // const advisor1 = AcademicAdvisor.build({
-    //     Lecturer: {
-    //         User: { firstName: "Nathan", lastName: "Blakemore", username: "nb2948382", password: "test123" }
-    //     },
-    //     { include: [User] }
-    // }, { include: [Lecturer] });
+    lecturer1.save();
+
+    //Trying to get around the problem above
+    //First saving the associated lecturer
+    const advisorlecturer1 = Lecturer.build({
+        User: { firstName: "Chris", lastName: "Deam", username: "cd7484758", password: "test123" }
+    }, { include: [User] });
+    advisorlecturer1.save();
+    //Then creating an academic advisor
+    const advisor1 = AcademicAdvisor.build({}, {});
     advisor1.save();
 
-    // user2 = User.findOne({ where: { firstName: "Nathan" } });
-    // userID = user2.id;
+    //Now trying to update the associated advisor coloumn to match with the ID of the lecturer created
+    const user2 = await User.findOne({ where: { firstName: "Chris" } });
+    const userID = user2.id;
+    const lecturer2 = await Lecturer.findOne({ where: { UserId: userID } });
+    AcademicAdvisor.upsert({
+        id: 1,
+        LecturerId: lecturer2.id,
+    });
 
-    // const lecturer2 = Lecturer.findOne({ where: { id: userID } });
 
-    // const advisor1 = AcademicAdvisor.build();
-    // advisor1.save();
 
-    // AcademicAdvisor.upsert({
-    //     id: 2,
-    //     LecturerId: lecturer2.id,
-    // })
+    //Creating a course leader
+    const courseLeaderLecturer = Lecturer.build({
+        User: { firstName: "Lantana", lastName: "Hewitt", username: "lh383847372", password: "test123" }
+    }, { include: [User] });
+    courseLeaderLecturer.save();
+    //Then creating an academic advisor
+    const courseLeader1 = CourseLeader.build({}, {});
+    courseLeader1.save();
+
+    //Now trying to update the associated course leader coloumn to match with the ID of the lecturer created
+    const user3 = await User.findOne({ where: { firstName: "Lantana" } });
+    const userID3 = user3.id;
+    const lecturer3 = await Lecturer.findOne({ where: { UserId: userID3 } });
+    CourseLeader.upsert({
+        id: 1,
+        LecturerId: lecturer3.id,
+    });
+
+
+    //Creating a course
+
+    const csCourse = Course.build({ courseName: "BSc Computer Science", courseCode: "CS202348" });
+    csCourse.save();
+
+    const user4 = await User.findOne({ where: { firstName: "Lantana" } });
+    const userID4 = user4.id;
+
+    const lecturer4 = await Lecturer.findOne({ where: { UserId: userID4 } });
+    // console.log(lecturer4.id);
+    const courseLeader2 = await CourseLeader.findOne({ where: { LecturerId: lecturer4.id } });
+
+    const courseID = await Course.findOne({ where: { courseName: "BSc Computer Science" } });
+    // console.log(courseLeader2);
+    // console.log(courseID);
+
+    await CourseLeader.upsert({
+        id: courseLeader2.id,
+        CourseId: courseID.id
+    });
+
+    Course.upsert({
+        id: courseID.id,
+        courseName: "BSc Computer Science",
+        CourseLeaderId: courseLeader2.id,
+    })
 
 }
 
+//Do not run this command if the database does not already exist -IMPORTANT-
 //createDummyData();
-
-//const sameAdvisor = AcademicAdvisor.findByPk(1);
-
-
-//createDummyData();
-
-
-// //student1.set({ AcademicAdvisor: {} })
 
 
 async function clearTables() {
