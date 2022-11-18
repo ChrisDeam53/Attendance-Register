@@ -28,6 +28,13 @@ const routes = [
         name: "home",
         meta: { requiredAuth: true},
         component: () => import("./components/HomePage")
+    },
+    {
+        path: "/newLesson",
+        alias: "/newLesson",
+        name: "newLesson",
+        meta: { requiredAuth: true},
+        component: () => import("./components/LessonForm/NewLessonForm")
     }
 ];
 

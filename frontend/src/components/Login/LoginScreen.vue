@@ -1,16 +1,10 @@
 <template>
     <form class="login" @submit.prevent="verifyUser">
-        <!-- <input type="text" placeholder="Username" required>
-        <input type="password" placeholder="Password" required> -->
         <input v-model="enteredUsername" placeholder="Username" required>
         <input v-model="enteredPassword" placeholder="Password" required>
-
         <router-link to="{name: 'protected'}" custom v-slot="{ verifyUser }">
             <SmallButton @click="verifyUser" role="link" buttonName="Login"></SmallButton>
         </router-link>
-
-
-
     </form>
 </template>
 
@@ -142,6 +136,7 @@ button{
 <script>
     import SmallButton from '../PageButton/SmallButton.vue'
     import { ref } from 'vue'
+    import SecurityDataService from '../../services/SecurityDataService';
 
     export default {
         setup() {
@@ -156,9 +151,23 @@ button{
         }
         },
         mounted() {
-            console.log(this.enteredUsername)
-            console.log(this.enteredPassword)
-            console.log(this.isAuthenticated)
+            console.log(this.enteredUsername);
+            console.log(this.enteredPassword);
+            console.log(this.isAuthenticated);
+
+            SecurityDataService.getPublicContent().then(
+                response => {
+                    this.content = response.data;
+                },
+                error => {
+                    this.content =
+                        (error.response && 
+                        error.response.data &&
+                        error.response.data.message ) ||
+                        error.message ||
+                        error.toString();
+                    }
+                );
         },
         data() {
             return {
@@ -168,20 +177,35 @@ button{
         components: {
             SmallButton
         },
+        computed: {
+            loggedIn() {
+                return this.$store.state.auth.status.loggedIn;
+            },
+        },
+            created() {
+                if (this.loggedIn) {
+                    this.$router.push("/profile");
+                }
+        },
         methods: {
-            verifyUser() {
-                // Send the user object -> Backend -> Database
-                // Database -> Backend -> Return response
-                // TODO: AUTH USER AGAINST API HERE
-                console.log("I've been pressed, yo!");
-                if (this.enteredUsername == "aaa" && this.enteredPassword == "qqq") {
-                    console.log("LOGGED IN!");
-                    this.$router.push({name: 'home'});
-                }
-                else {
-                    console.log("NOT CORRECT!");
-                }
-            }
+           verifyUser(user) {
+            this.loading = true;
+
+            this.$store.dispatch("auth/login", user).then(
+                () => {
+                    this.$router.push("/profile");
+                    },
+                (error) => {
+                    this.loading = false;
+                    this.message =
+                        (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+                    }
+                );
+            },
         }
     };
 </script>
