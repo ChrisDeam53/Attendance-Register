@@ -11,26 +11,7 @@ exports.findall = (req, res) => {
         return;
     }
 
-    const userId = user.findOne({
-        where: {
-            username: req.params.username
-        }
-    })
-    .then
-    const usermodules = usermodules.findall({ 
-        where: {
-            userId: userId
-        },
-        attributes: ['ModuleId']
-    }) 
-    .then
-    const modules = await module.findall({
-        where: {
-            id: usermodules
-        }
-    })
-    
-    
+    // What functions do we have mazen, please explain :((
 }
 
 
