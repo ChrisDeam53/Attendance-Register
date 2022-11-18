@@ -19,24 +19,52 @@ const handleError = fn => (...params) =>
     });
  
 export const api = {
-    getpet: handleError(async id => {
+    /**
+     * Lesson Handlers.
+     */
+    getLesson: handleError(async id => {
         const res = await axios.get(baseURL + id);
         return res.data;
     }),
-    getpets: handleError(async () => {
+    getLessons: handleError(async () => {
         const res = await axios.get(baseURL);
         console.log("received data: " + JSON.stringify(res.data) );
         return res.data;
     }),
-    deletepet: handleError(async id => {
+    deleteLesson: handleError(async id => {
         const res = await axios.delete(baseURL + id);
         return res.data;
     }),
-    createpet: handleError(async payload => {
+    createLesson: handleError(async payload => {
         const res = await axios.post(baseURL, payload);
         return res.data;
     }),
-    updatepet: handleError(async payload => {
+    updateLesson: handleError(async payload => {
+        const res = await axios.put(baseURL + payload._id, payload);
+        return res.data;
+    }),
+
+    /**
+     * Student Handlers.
+     */
+     getStudent: handleError(async id => {
+        const res = await axios.get(baseURL + id);
+        return res.data;
+    }),
+    getStudents: handleError(async () => {
+        const res = await axios.get(baseURL);
+        console.log("received data: " + JSON.stringify(res.data) );
+        return res.data;
+    }),
+    deleteStudent: handleError(async id => {
+        const res = await axios.delete(baseURL + id);
+        return res.data;
+    }),
+    createStudent: handleError(async payload => {
+        const res = await axios.post(baseURL, payload);
+        return res.data;
+    }),
+    updateStudent: handleError(async payload => {
         const res = await axios.put(baseURL + payload._id, payload);
         return res.data;
     })

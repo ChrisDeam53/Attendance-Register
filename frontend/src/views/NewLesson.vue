@@ -1,7 +1,7 @@
 <template>
     <div>
       <h1>New Lesson</h1>
-      <pet-form @createOrUpdate="createOrUpdate"></pet-form>
+      <newLessonForm @createOrUpdate="createOrUpdate"></newLessonForm>
     </div>
    </template>
     
@@ -11,15 +11,14 @@
    export default {
     name: 'new-pet',
     components: {
-      // TODO
-      // 'lesson-form': newLessonForm
+      newLessonForm
     },
     methods: {
-      createOrUpdate: async function(pet) {
-        const res = await api.createpet(pet);
+      createOrUpdate: async function(lesson) {
+        const res = await api.createLesson(lesson);
         if (res.success === true)
            this.flash('lesson created', 'success');
-        this.$router.push(`/pets/`);
+        this.$router.push(`/lessonTableView/`);
       }
     }
    };
