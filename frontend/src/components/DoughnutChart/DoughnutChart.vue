@@ -1,14 +1,12 @@
 <template>
-    <body>
-        <Doughnut></Doughnut>   
-    </body>  
+    <Doughnut></Doughnut>   
 </template>
 
 <style>
-body
-{
-    padding-top: 250px;
-}
+/* body */
+/* {
+    padding-top: 15%;
+} */
 </style>
   
 <script>

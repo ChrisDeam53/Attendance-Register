@@ -9,15 +9,15 @@ const routes = [
         component: () => import("./components/Login/LoginScreen")
     },
     {
-        path: "/tableView",
-        alias: "/tableView",
-        name: "tableView",
+        path: "/lessonTableView",
+        alias: "/lessonTableView",
+        name: "lessonTableView",
         meta: { requiredAuth: true},
-        component: () => import("./components/TableScreen")
+        component: () => import("./components/AttendanceTable/LessonTable")
     },
     {
-        path: "/pieView",
-        alias: "/piewView",
+        path: "/visualiseAttendance",
+        alias: "/visualiseAttendance",
         name: "pieView",
         meta: { requiredAuth: true},
         component: () => import("./components/VisualiseAttendance")

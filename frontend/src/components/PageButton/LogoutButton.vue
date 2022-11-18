@@ -14,7 +14,7 @@
             return {
             }
         },
-        name: "LoginScreen",
+        name: "LogoutButton",
         components: {
             SmallButton
         },

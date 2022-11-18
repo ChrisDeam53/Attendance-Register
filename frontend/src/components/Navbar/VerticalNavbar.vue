@@ -1,7 +1,7 @@
 <template>
     <ul class="sidebar-menu">
                 <li></li>
-                <li @click="aaa"><a href="#">Home Page</a></li>
+                <li @click="homePageClick"><a href="#">Home Page</a></li>
                 <li @click="logout"><a href="#">Sign Out</a></li>
             </ul>
 </template>
@@ -69,8 +69,10 @@ export default {
     },
     methods: {
             logout() {
-                console.log("PRESSED!")
-                this.$router.push({name: 'Home'})
+              this.$router.push({name: 'loginScreen'})
+            },
+            homePageClick() {
+              this.$router.push({name: 'home'})
             }
         }
 }

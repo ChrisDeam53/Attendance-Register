@@ -1,5 +1,8 @@
 <template>
-    <DoughnutChart></DoughnutChart>
+    <div class="navBar-container">
+        <Navbar></Navbar>
+    </div>
+        <DoughnutChart></DoughnutChart>
 </template>
 
 <style>
@@ -9,16 +12,23 @@ body
     background-color:#1F2739;
 }
 
+.navBar-container
+{
+    top: 5%;
+}
+
 </style>
 
 <script>
 
-    import DoughnutChart from "./PieChart/DoughnutChart.vue"
+    import DoughnutChart from "./DoughnutChart/DoughnutChart.vue"
+    import Navbar from "./Navbar/VerticalNavbar.vue"
 
     export default {
-        name: "LoginScreen",
+        name: "DonughtChart",
         components: {
-            DoughnutChart
+            DoughnutChart,
+            Navbar
         },
     }
 

@@ -1,26 +1,27 @@
 <template>
     <html>
-        <body>
-            <VerticalNavbar></VerticalNavbar>
-            <table class="container">
+         <body>
+              <VerticalNavbar></VerticalNavbar>
+              <td><SmallButtonVue @click="addStudentData()" buttonName="Add Attendance"></SmallButtonVue></td>
+             <table class="container">
                 <thead>
                     <tr>
-                        <th><h1>Module Name</h1></th>
-                        <th><h1>Module Code</h1></th>
-                        <th><h1>Module Leader</h1></th>
-                        <th><h1>Select Module</h1></th>
+                        <th><h1>First Name</h1></th>
+                        <th><h1>Second Name</h1></th>
+                        <th><h1>Attendance Status</h1></th>
+                        <th><h1>Select Student</h1></th>
                     </tr>
-                </thead>
-        <tbody>
-            <tr v-for="module in modules" v-bind:key="module.id">
-                <td>{{ module.id }}</td>
-                <td>{{ module.name }}</td>
-                <td>{{ module.handle }}</td>
-                <td><SmallButtonVue @click="selectModule(module.id)" buttonName="SELECT"></SmallButtonVue></td>
-            </tr>
-        </tbody>
-    </table>
-        </body>
+                    </thead>
+            <tbody>
+                <tr v-for="module in modules" v-bind:key="module.id">
+                    <td>{{ module.id }}</td>
+                    <td>{{ module.name }}</td>
+                    <td>{{ module.handle }}</td>
+                    <td><SmallButtonVue @click="editStudentData(module.id)" buttonName="Edit Attendance"></SmallButtonVue></td>
+                </tr>
+            </tbody>
+        </table>
+            </body>
     </html>
 </template>
 
@@ -133,38 +134,46 @@ h2 a {
 
 <script>
 
-    import VerticalNavbar from "./Navbar/VerticalNavbar.vue"
-    import SmallButtonVue from "./PageButton/SmallButton.vue";
+    import VerticalNavbar from "../Navbar/VerticalNavbar.vue"
+    import SmallButtonVue from "../PageButton/SmallButton.vue"
 
     export default {
         data() {
             return {
                 modules: [
-                { id: 'Module 1', name: '123', handle: 'Drew Durnill' },
-                { id: 'Module 2', name: '456', handle: 'Tommy Kay' },
-                { id: 'Module 3', name: '789', handle: 'John Smith' },
-                { id: 'Module 4', name: '666', handle: 'The Devil' },
-                { id: 'Module 5', name: '4634', handle: 'FryFrom Futurama' },
-                { id: 'Module 6', name: '423', handle: 'Homer Simpson' }
+                { id: 'Harry', name: 'Styles', handle: '1' },
+                { id: 'Eric', name: 'Kay', handle: '1' },
+                { id: 'John', name: 'Smith', handle: '0' },
+                { id: 'The', name: 'Devil', handle: '0' },
+                { id: 'FryFrom', name: 'Futurama', handle: '1' },
+                { id: 'Homer', name: 'Simpson', handle: '0' }
                 ]
             };
         },
         methods: {
-            selectModule(moduleID) {
-                if (moduleID > -1) {
-                    console.log("ID IS: " + moduleID);
-                }
-                else {
-                    console.log("ID IS: " + moduleID);
-                }
+            addStudentData() {
+                console.log("PRESSED!");
+            },
+            editStudentData(studentID) {
+                console.log("Student First Name: " + studentID);
             }
 
         },
-        name: "TableView",
-            components: {
-                VerticalNavbar,
-                SmallButtonVue
+        components: {
+            VerticalNavbar,
+            SmallButtonVue
+        },
+        name: 'TableView',
+        props: {
+            firstName: {
+                type: String
+            },
+            secondName: {
+                type: String
+            },
+            attendanceStatus: {
+                type: Boolean
             }
+        },
     }
-
 </script>
