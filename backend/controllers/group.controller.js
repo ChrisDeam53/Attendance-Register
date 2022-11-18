@@ -4,39 +4,39 @@ const group = db.group;
 const user = db.user;
 const usermodule = db.usermodules;
 
-
 //findall groups assigned to the the module
-exports.findall = (req, res) => {
-    // Validate request --needs some other validation logic presumably, checking auth token?  no
-    if (!req.params.moduleId) {
-        res.status(400).send({ message: "Content can not be empty!" });
-        return;
-    }
+async function findall(req, res) {
+    const moduleId = req.params.moduleId;
 
-    //req.<smth>.userName
-    //where do you put this???? store in a const, then do res.send ? or res.data = var?
-    const result = queryGroups(userId, moduleId);   //They aren't strictly ids, they're just named that
+    const user; //await models.user.findByPk(id);    //should be able to get username, which object is that stored in?
+
+    //check if the user is a student or lecturer? 
 
 
-
-
-}
-
-async function queryGroups(_userId, _moduleId)
-{
-    return await sequelize.sync().then(() => {
+    const groups = await sequelize.sync().then(() => {
         group.findall({ //wrong object? yes, those queried properties are not in the group model
             where: {
-                userName: _userId,
+                userName: _userId, //you need link tables to do this properly
                 courseCode: _moduleId
-              //conditionals
+                    //conditionals
             }
         }).then(() => {
             console.log("Successful query")
         }).catch((error) => {
             console.error('Query error : ', error);
         });
-      }).catch((error) => {
-          console.error('Sync error : ', error);
-      });
+    }).catch((error) => {
+        console.error('Sync error : ', error);
+    });
+
+    if (groups) {
+        res.status(200).json(groups);
+    } else {
+        res.status(404).send('404 - Not found');
+    }
+
+}
+
+module.exports = {
+    findall,
 }

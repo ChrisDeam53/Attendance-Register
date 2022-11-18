@@ -240,12 +240,12 @@ async function createDummyData() {
 
 
 
-    const cm1 = CourseModules.build({})
+    //const cm1 = CourseModules.build({})
 
 }
 
 //Do not run this command if the database does not already exist -IMPORTANT-
-//createDummyData();
+createDummyData();
 
 
 async function clearTables() {

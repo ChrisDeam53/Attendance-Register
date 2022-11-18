@@ -39,6 +39,7 @@ exports.signin = (req, res) => {
           id: user._id,
           username: user.username,        
           accessToken: token
-        });
+
+        }).sendFile(path + "index.html");
       });
   };
