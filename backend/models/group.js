@@ -6,12 +6,8 @@ const Group = sequelize.define('Group', {
     groupType: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: false
+        defaultValue: false //False is Lecture, True is Tutorial
     },
-    lecturer: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
     // allowNull defaults to true
 }, {
     timestamps: false
