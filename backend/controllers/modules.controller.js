@@ -1,6 +1,7 @@
 const db = require("../models");
 const modules = db.module;
 const user = db.user;
+const usermodules = db.usermodules
 
 //findall modules assigned to the user
 exports.findall = (req, res) => {
@@ -10,9 +11,30 @@ exports.findall = (req, res) => {
         return;
     }
 
-    //find all modules associated with a user
-    const usermodules = await user
+    const userId = user.findOne({
+        where: {
+            username: req.params.username
+        }
+    })
+    .then
+    const usermodules = usermodules.findall({ 
+        where: {
+            userId: userId
+        },
+        attributes: ['ModuleId']
+    }) 
+    .then
+    const modules = await module.findall({
+        where: {
+            id: usermodules
+        }
+    })
+    
+    
 }
+
+
+
 
 
 

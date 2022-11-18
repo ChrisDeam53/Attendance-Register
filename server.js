@@ -14,7 +14,7 @@ const app = express();
 const path = __dirname + '/build/';
 
 //Port handle
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 
 //Bodyparser handles - only use these on routes where they are needed, according to the context
 //Parse requests of content-type - application/json

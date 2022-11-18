@@ -1,36 +1,42 @@
 const db = require("../models");
-const modules = db.group;
+const module = db.module;
+const group = db.group;
+const user = db.user;
+const usermodule = db.usermodules;
+
 
 //findall groups assigned to the the module
 exports.findall = (req, res) => {
-    // Validate request --needs some other validation logic presumably, checking auth token?  or 
+    // Validate request --needs some other validation logic presumably, checking auth token?  no
     if (!req.params.moduleId) {
         res.status(400).send({ message: "Content can not be empty!" });
         return;
     }
 
+    //req.<smth>.userName
+    //where do you put this???? store in a const, then do res.send ? or res.data = var?
+    const result = queryGroups(userId, moduleId);   //They aren't strictly ids, they're just named that
 
 
-    //below can just be done by chaining query commands - the 'filter' is done with 'where id is xyz' rather than as a completely seperate operation
-    //within a specific module, load all the groups associated with it
-    //then, filter out the groups that the user doesn't have access to (eg. only include groups that a lecturer can see)
-    //then, ???
 
-    /*  --ripped from carlos' codeberg
-        const username = req.query.username;
-    //We use req.query.name to get query string from the Request and consider it as condition for findAll() method.
-    var condition = username ? { username: { $regex: new RegExp(username), $options: "i" } } : {};
-    User
-        .find(condition)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send( {
-                message: 
-                    err.message || "Some error occurred while retrieving Users."
-            });
+
+}
+
+async function queryGroups(_userId, _moduleId)
+{
+    return await sequelize.sync().then(() => {
+        group.findall({ //wrong object? yes, those queried properties are not in the group model
+            where: {
+                userName: _userId,
+                courseCode: _moduleId
+              //conditionals
+            }
+        }).then(() => {
+            console.log("Successful query")
+        }).catch((error) => {
+            console.error('Query error : ', error);
         });
-
-    */
+      }).catch((error) => {
+          console.error('Sync error : ', error);
+      });
 }
