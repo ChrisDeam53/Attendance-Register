@@ -10,8 +10,7 @@ exports.findall = (req, res) => {
         return;
     }
 
-    //find all modules associated with a user
-    const usermodules = await user
+    // What functions do we have mazen, please explain :((
 }
 
 
