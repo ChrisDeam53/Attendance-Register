@@ -23,7 +23,7 @@ const User = sequelize.define('User', {
     roleType: {
         type: DataTypes.TINYINT,
         defaultValue: 0
-            //Integers will represent role types, these will be decided later. Defaults to 0, (lowest level of access)
+            //Integers will represent role types, these will be decided later. Defaults to 0, (lowest level of access), 0 is student, 1 is lecturer
     }
 
 }, {

@@ -94,61 +94,133 @@ AcademicAdvisor.belongsToMany(Student, { through: AcademicAdvisees });
  * 
  */
 async function createDummyData() {
-    //Works to create a student and also their associated user. 
-    const student1 = Student.build({ User: { firstName: "Mazen", lastName: "Omar", username: "mo190201", password: "test123" } }, { include: [User] });
-    student1.save();
+
+    createDummyUsers();
+    createDummyCourse();
+    createDummyModules();
+    createDummyDataUserModules();
+}
+
+//Do not run this command if the database does not already exist -IMPORTANT-
+createDummyData();
 
 
-    //Works to create a lecturer and their associated user. 
-    const lecturer1 = Lecturer.build({
-        User: { firstName: "Nathan", lastName: "Blakemore", username: "nb29498382", password: "test123" }
-    }, { include: [User] });
-    lecturer1.save();
-    const user1 = await User.findOne({ where: { firstName: "Nathan" } });
-    const lect1 = await Lecturer.findOne({ where: { UserId: user1.id } });
+
+async function clearTables() {
+    await sequelize.drop();
+}
+
+//clearTables();
+
+sequelize
+    .sync()
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+
+async function createDummyDataUserModules() {
+    const lect5 = await User.findOne({ where: { firstName: "Shaun" } });
+
+    const lect6 = await User.findOne({ where: { firstName: "Traci" } });
+
+    const lect7 = await User.findOne({ where: { firstName: "Connell" } });
+
+    const lect8 = await User.findOne({ where: { firstName: "Madge" } });
+
+    const lect9 = await User.findOne({ where: { firstName: "Enid" } });
+
+    //Collecting the modules and then setting their course leaders
+    const modu1 = await Module.findOne({ where: { moduleName: "CAPS" } });
+
+    const modu2 = await Module.findOne({ where: { moduleName: "SAD" } });
+
+    const modu3 = await Module.findOne({ where: { moduleName: "Advanced Progamming" } });
+
+    const modu4 = await Module.findOne({ where: { moduleName: "ADS" } });
+
+    const modu5 = await Module.findOne({ where: { moduleName: "AI&ML" } });
+
+    const modu6 = await Module.findOne({ where: { moduleName: "MATH" } });
+
+    const um1 = UserModules.build({ ModuleId: modu1.id, UserId: lect5.id });
+    um1.save();
+
+    const um2 = UserModules.build({ ModuleId: modu1.id, UserId: lect6.id });
+    um2.save();
+
+    const um3 = UserModules.build({ ModuleId: modu1.id, UserId: lect7.id });
+    um3.save();
+
+    const um4 = UserModules.build({ ModuleId: modu1.id, UserId: lect8.id });
+    um4.save();
+
+    const um5 = UserModules.build({ ModuleId: modu1.id, UserId: lect9.id });
+    um5.save();
+}
 
 
-    //Trying to get around the problem above
-    //First saving the associated lecturer
-    const advisorlecturer1 = Lecturer.build({
-        User: { firstName: "Chris", lastName: "Deam", username: "cd7484758", password: "test123" }
-    }, { include: [User] });
-    advisorlecturer1.save();
-    //Then creating an academic advisor
-    const advisor1 = AcademicAdvisor.build({}, {});
-    advisor1.save();
+async function createDummyModules() {
+    //Creating a bunch of modules and then setting various lectureres to be their lectureres and also a module leader
 
-    //Now trying to update the associated advisor coloumn to match with the ID of the lecturer created
-    const user2 = await User.findOne({ where: { firstName: "Chris" } });
-    const userID = user2.id;
-    const lecturer2 = await Lecturer.findOne({ where: { UserId: userID } });
-    AcademicAdvisor.upsert({
-        id: 1,
-        LecturerId: lecturer2.id,
-    });
+    const module1 = Module.build({ moduleName: "CAPS", moduleCode: "CHA-3382", moduleLeader: lecturer2.id });
+    module1.save();
+
+    const module2 = Module.build({ moduleName: "SAD", moduleCode: "CHA-3382", moduleLeader: lect5id });
+    module2.save();
+
+    const module3 = Module.build({ moduleName: "Advanced Progamming", moduleCode: "CHA-3382", moduleLeader: lect6id });
+    module3.save();
+
+    const module4 = Module.build({ moduleName: "ADS", moduleCode: "CHA-3382", moduleLeader: lect7id });
+    module4.save();
+
+    const module5 = Module.build({ moduleName: "AI&ML", moduleCode: "CHA-3382", moduleLeader: lect8id });
+    module5.save();
+
+    const module6 = Module.build({ moduleName: "MATH", moduleCode: "CHA-3382", moduleLeader: lect9id });
+    module6.save();
+
+    //Collecting the modules and then setting their course leaders
+    const modu1 = await Module.findOne({ where: { moduleName: "CAPS" } });
+
+    const modu2 = await Module.findOne({ where: { moduleName: "SAD" } });
+
+    const modu3 = await Module.findOne({ where: { moduleName: "Advanced Progamming" } });
+
+    const modu4 = await Module.findOne({ where: { moduleName: "ADS" } });
+
+    const modu5 = await Module.findOne({ where: { moduleName: "AI&ML" } });
+
+    const modu6 = await Module.findOne({ where: { moduleName: "MATH" } });
+
+    //Putting the various modules under the one course created
+
+    const cm1 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu1.id });
+    cm1.save();
+
+    const cm2 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu2.id });
+    cm2.save();
+
+    const cm3 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu3.id });
+    cm3.save();
+
+    const cm4 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu4.id });
+    cm4.save();
+
+    const cm5 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu5.id });
+    cm5.save();
+
+    const cm6 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu6.id });
+    cm6.save();
+}
 
 
-    //Creating a course leader
-    const courseLeaderLecturer = Lecturer.build({
-        User: { firstName: "Lantana", lastName: "Hewitt", username: "lh383847372", password: "test123" }
-    }, { include: [User] });
-    courseLeaderLecturer.save();
-    //Then creating an academic advisor
-    const courseLeader1 = CourseLeader.build({}, {});
-    courseLeader1.save();
-
-    //Now trying to update the associated course leader coloumn to match with the ID of the lecturer created
-    const user3 = await User.findOne({ where: { firstName: "Lantana" } });
-    const userID3 = user3.id;
-    const lecturer3 = await Lecturer.findOne({ where: { UserId: userID3 } });
-    CourseLeader.upsert({
-        id: 1,
-        LecturerId: lecturer3.id,
-    });
-
+async function createDummyCourse() {
 
     //Creating a course
-
     const csCourse = Course.build({ courseName: "BSc Computer Science", courseCode: "CS202348" });
     csCourse.save();
 
@@ -176,140 +248,105 @@ async function createDummyData() {
 
 
 
-    //Creating many lectureres to make them module leaders
+}
+
+
+
+async function createDummyUsers() {
+    //Works to create a student and also their associated user. 
+    const student1 = Student.build({ User: { firstName: "Mazen", lastName: "Omar", username: "mo190201", password: "test123" } }, { include: [User] });
+    student1.save();
+
+
+    //Works to create a lecturer and their associated user. 
+    const lecturer1 = Lecturer.build({
+        User: { firstName: "Nathan", lastName: "Blakemore", username: "nb29498382", password: "test123", roleType: 1 }
+    }, { include: [User] });
+    lecturer1.save();
+
+
+    //First saving the associated lecturer
+    const advisorlecturer1 = Lecturer.build({
+        User: { firstName: "Chris", lastName: "Deam", username: "cd7484758", password: "test123", roleType: 1 }
+    }, { include: [User] });
+    advisorlecturer1.save();
+    //Then creating an academic advisor
+    const advisor1 = AcademicAdvisor.build({}, {});
+    advisor1.save();
+
+    //Updating the lecturer to become an academic advisor
+    const user2 = await User.findOne({ where: { firstName: "Chris" } });
+    const userID = user2.id;
+    const lecturer2 = await Lecturer.findOne({ where: { UserId: userID } });
+    AcademicAdvisor.upsert({
+        id: 1,
+        LecturerId: lecturer2.id,
+    });
+
+
+    //Creating a course leader
+    const courseLeaderLecturer = Lecturer.build({
+        User: { firstName: "Lantana", lastName: "Hewitt", username: "lh383847372", password: "test123", roleType: 1 }
+    }, { include: [User] });
+    courseLeaderLecturer.save();
+    //Then creating an course leader
+    const courseLeader1 = CourseLeader.build({}, {});
+    courseLeader1.save();
+
+    //Now trying to update the associated course leader coloumn to match with the ID of the lecturer created
+    const user3 = await User.findOne({ where: { firstName: "Lantana" } });
+    const userID3 = user3.id;
+    const lecturer3 = await Lecturer.findOne({ where: { UserId: userID3 } });
+    CourseLeader.upsert({
+        id: 1,
+        LecturerId: lecturer3.id,
+    });
+
+
+
+    //Creating some dummy lecturers to make them module leaders and teachers
+    const lecturer4 = Lecturer.build({
+        User: { firstName: "Shaun", lastName: "Terrance", username: "st29498382", password: "test123", roleType: 1 }
+    }, { include: [User] });
+    lecturer4.save();
+
     const lecturer5 = Lecturer.build({
-        User: { firstName: "Shaun", lastName: "Terrance", username: "st29498382", password: "test123" }
+        User: { firstName: "Shaun", lastName: "Terrance", username: "st29498382", password: "test123", roleType: 1 }
     }, { include: [User] });
     lecturer5.save();
 
-    const lect5 = await User.findOne({ where: { firstName: "Shaun" } });
-    const lect5id = lect5.id;
-
     const lecturer6 = Lecturer.build({
-        User: { firstName: "Traci", lastName: "Elissa", username: "te323382", password: "test123" }
+        User: { firstName: "Traci", lastName: "Elissa", username: "te323382", password: "test123", roleType: 1 }
     }, { include: [User] });
     lecturer6.save();
 
-    const lect6 = await User.findOne({ where: { firstName: "Traci" } });
-    const lect6id = lect6.id;
-
     const lecturer7 = Lecturer.build({
-        User: { firstName: "Connell", lastName: "Mabelle", username: "cm2098309", password: "test123" }
+        User: { firstName: "Connell", lastName: "Mabelle", username: "cm2098309", password: "test123", roleType: 1 }
     }, { include: [User] });
     lecturer7.save();
 
-    const lect7 = await User.findOne({ where: { firstName: "Connell" } });
-    const lect7id = lect7.id;
-
-
     const lecturer8 = Lecturer.build({
-        User: { firstName: "Madge", lastName: "Gerald", username: "mg29432323", password: "test123" }
+        User: { firstName: "Madge", lastName: "Gerald", username: "mg29432323", password: "test123", roleType: 1 }
     }, { include: [User] });
     lecturer8.save();
 
-
-    const lect8 = await User.findOne({ where: { firstName: "Madge" } });
-    const lect8id = lect8.id;
-
-
     const lecturer9 = Lecturer.build({
-        User: { firstName: "Enid", lastName: "Reagan", username: "er398309283", password: "test123" }
+        User: { firstName: "Enid", lastName: "Reagan", username: "er398309283", password: "test123", roleType: 1 }
     }, { include: [User] });
     lecturer9.save();
 
+    //Making more students
+    const student2 = Student.build({ User: { firstName: "Tiger", lastName: "Foster", username: "tf2312201", password: "test123" } }, { include: [User] });
+    student2.save();
 
-    const lect9 = await User.findOne({ where: { firstName: "Madge" } });
-    const lect9id = lect9.id;
+    const student3 = Student.build({ User: { firstName: "Ward", lastName: "Royle", username: "wr2837312", password: "test123" } }, { include: [User] });
+    student3.save();
 
-    //Creating a bunch of modules and then setting various lectureres to be their lectureres and also a module leader
+    const student4 = Student.build({ User: { firstName: "Arthur", lastName: "Finn", username: "tf2312201", password: "test123" } }, { include: [User] });
+    student4.save();
 
-    const module1 = Module.build({ moduleName: "CAPS", moduleCode: "CHA-3382", moduleLeader: lecturer2.id });
-    module1.save();
+    const student5 = Student.build({ User: { firstName: "Silvester", lastName: "Kodey", username: "sk2872871", password: "test123" } }, { include: [User] });
+    student5.save();
 
-    const modu1 = await Module.findOne({ where: { moduleName: "CAPS" } });
-
-
-    const module2 = Module.build({ moduleName: "SAD", moduleCode: "CHA-3382", moduleLeader: lect5id });
-    module2.save();
-
-    const modu2 = await Module.findOne({ where: { moduleName: "SAD" } });
-
-    const module3 = Module.build({ moduleName: "Advanced Progamming", moduleCode: "CHA-3382", moduleLeader: lect6id });
-    module3.save();
-
-    const modu3 = await Module.findOne({ where: { moduleName: "Advanced Progamming" } });
-
-    const module4 = Module.build({ moduleName: "ADS", moduleCode: "CHA-3382", moduleLeader: lect7id });
-    module4.save();
-
-    const modu4 = await Module.findOne({ where: { moduleName: "ADS" } });
-
-    const module5 = Module.build({ moduleName: "AI&ML", moduleCode: "CHA-3382", moduleLeader: lect8id });
-    module5.save();
-
-    const modu5 = await Module.findOne({ where: { moduleName: "AI&ML" } });
-
-    const module6 = Module.build({ moduleName: "MATH", moduleCode: "CHA-3382", moduleLeader: lect9id });
-    module6.save();
-
-    const modu6 = await Module.findOne({ where: { moduleName: "MATH" } });
-
-    const cm1 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu1.id });
-    cm1.save();
-
-    const cm2 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu2.id });
-    cm2.save();
-
-    const cm3 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu3.id });
-    cm3.save();
-
-    const cm4 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu4.id });
-    cm4.save();
-
-    const cm5 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu5.id });
-    cm5.save();
-
-    const cm6 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu6.id });
-    cm6.save();
-
-    // const um1 = UserModules.build({ ModuleId: modu1.id, UserId: lect5id });
-    // um1.save();
-
-    // const um2 = UserModules.build({ ModuleId: modu1.id, UserId: lect6id });
-    // um2.save();
-
-    // const um3 = UserModules.build({ ModuleId: modu1.id, UserId: lect7id });
-    // um3.save();
-
-    // const um4 = UserModules.build({ ModuleId: modu1.id, UserId: lect8id });
-    // um4.save();
-
-    // const um5 = UserModules.build({ ModuleId: modu1.id, UserId: lect9id });
-    // um5.save();
-
-    // const um6 = UserModules.build({ ModuleId: modu1.id, UserId: lecturer2.id });
-    // um6.save();
-
-    // const um7 = UserModules.build({ ModuleId: modu1.id, UserId: lect1 });
-    // um7.save();
 
 }
-
-//Do not run this command if the database does not already exist -IMPORTANT-
-//createDummyData();
-
-
-async function clearTables() {
-    await sequelize.drop();
-}
-
-//clearTables();
-
-sequelize
-    .sync()
-    .then((result) => {
-        console.log(result);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
