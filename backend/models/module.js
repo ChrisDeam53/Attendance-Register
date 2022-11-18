@@ -13,15 +13,10 @@ const Module = sequelize.define('Module', {
         allowNull: false
 
     },
-    courseLeader: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
     moduleLeader: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: true
     },
-
 }, {
     // Other model options go here
     timestamps: false
