@@ -11,21 +11,21 @@ Vue.use(VueFlashMessage, {
 });
 
 const vm = new Vue();
-const baseURL = 'http://localhost:8080/petshop/pets/';
+const baseURL = 'http://localhost:8080/login/';
 
 const handleError = fn => (...params) =>
     fn(...params).catch(error => {
         vm.flash(`${error.response.status}: ${error.response.statusText}`, 'error');
     });
- 
+
 export const api = {
     getpet: handleError(async id => {
         const res = await axios.get(baseURL + id);
         return res.data;
     }),
-    getpets: handleError(async () => {
+    getpets: handleError(async() => {
         const res = await axios.get(baseURL);
-        console.log("received data: " + JSON.stringify(res.data) );
+        console.log("received data: " + JSON.stringify(res.data));
         return res.data;
     }),
     deletepet: handleError(async id => {
