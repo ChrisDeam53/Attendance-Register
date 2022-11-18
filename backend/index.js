@@ -104,6 +104,9 @@ async function createDummyData() {
         User: { firstName: "Nathan", lastName: "Blakemore", username: "nb29498382", password: "test123" }
     }, { include: [User] });
     lecturer1.save();
+    const user1 = await User.findOne({ where: { firstName: "Nathan" } });
+    const lect1 = await Lecturer.findOne({ where: { UserId: user1.id } });
+
 
     //Trying to get around the problem above
     //First saving the associated lecturer
@@ -223,29 +226,77 @@ async function createDummyData() {
     const module1 = Module.build({ moduleName: "CAPS", moduleCode: "CHA-3382", moduleLeader: lecturer2.id });
     module1.save();
 
+    const modu1 = await Module.findOne({ where: { moduleName: "CAPS" } });
+
+
     const module2 = Module.build({ moduleName: "SAD", moduleCode: "CHA-3382", moduleLeader: lect5id });
     module2.save();
+
+    const modu2 = await Module.findOne({ where: { moduleName: "SAD" } });
 
     const module3 = Module.build({ moduleName: "Advanced Progamming", moduleCode: "CHA-3382", moduleLeader: lect6id });
     module3.save();
 
+    const modu3 = await Module.findOne({ where: { moduleName: "Advanced Progamming" } });
+
     const module4 = Module.build({ moduleName: "ADS", moduleCode: "CHA-3382", moduleLeader: lect7id });
     module4.save();
+
+    const modu4 = await Module.findOne({ where: { moduleName: "ADS" } });
 
     const module5 = Module.build({ moduleName: "AI&ML", moduleCode: "CHA-3382", moduleLeader: lect8id });
     module5.save();
 
+    const modu5 = await Module.findOne({ where: { moduleName: "AI&ML" } });
+
     const module6 = Module.build({ moduleName: "MATH", moduleCode: "CHA-3382", moduleLeader: lect9id });
     module6.save();
 
+    const modu6 = await Module.findOne({ where: { moduleName: "MATH" } });
 
+    const cm1 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu1.id });
+    cm1.save();
 
-    const cm1 = CourseModules.build({})
+    const cm2 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu2.id });
+    cm2.save();
+
+    const cm3 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu3.id });
+    cm3.save();
+
+    const cm4 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu4.id });
+    cm4.save();
+
+    const cm5 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu5.id });
+    cm5.save();
+
+    const cm6 = CourseModules.build({ CourseId: courseID.id, ModuleId: modu6.id });
+    cm6.save();
+
+    // const um1 = UserModules.build({ ModuleId: modu1.id, UserId: lect5id });
+    // um1.save();
+
+    // const um2 = UserModules.build({ ModuleId: modu1.id, UserId: lect6id });
+    // um2.save();
+
+    // const um3 = UserModules.build({ ModuleId: modu1.id, UserId: lect7id });
+    // um3.save();
+
+    // const um4 = UserModules.build({ ModuleId: modu1.id, UserId: lect8id });
+    // um4.save();
+
+    // const um5 = UserModules.build({ ModuleId: modu1.id, UserId: lect9id });
+    // um5.save();
+
+    // const um6 = UserModules.build({ ModuleId: modu1.id, UserId: lecturer2.id });
+    // um6.save();
+
+    // const um7 = UserModules.build({ ModuleId: modu1.id, UserId: lect1 });
+    // um7.save();
 
 }
 
 //Do not run this command if the database does not already exist -IMPORTANT-
-//createDummyData();
+createDummyData();
 
 
 async function clearTables() {
