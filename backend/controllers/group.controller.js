@@ -8,7 +8,7 @@ const usermodule = db.usermodules;
 async function findall(req, res) {
     const moduleId = req.params.moduleId;
 
-    const user; //await models.user.findByPk(id);    //should be able to get username, which object is that stored in?
+    // const user; //await models.user.findByPk(id);    //should be able to get username, which object is that stored in?
 
     //check if the user is a student or lecturer? 
 
