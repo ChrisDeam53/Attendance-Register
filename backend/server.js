@@ -23,8 +23,8 @@ const jsonParser = bodyParser.json()
 const urlencodedParser = bodyParser.urlencoded({ extended: true })
 
 // Route handles
-const login = require('./backend/routes/api/login')
-const table = require('./backend/routes/api/tableView')
+const login = require('./routes/api/login')
+const table = require('./routes/api/tableView')
 
 //
 // MIDDLEWARE REGISTRATION

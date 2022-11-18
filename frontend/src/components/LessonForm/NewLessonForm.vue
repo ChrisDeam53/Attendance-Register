@@ -1,17 +1,11 @@
 <template>
-    <form class="login" @submit.prevent="verifyUser">
-        <!-- <input type="text" placeholder="Username" required>
-        <input type="password" placeholder="Password" required> -->
-        <input v-model="enteredUsername" placeholder="Username" required>
-        <input v-model="enteredPassword" placeholder="Password" required>
-
-        <router-link to="{name: 'protected'}" custom v-slot="{ verifyUser }">
-            <SmallButton @click="verifyUser" role="link" buttonName="Login"></SmallButton>
-        </router-link>
-
-
-
+    <body>
+        <form class="login" @submit.prevent="verifyUser">
+        <input v-model="enteredLessonNumber" placeholder="Lesson Number" required>
+        <input v-model="enteredDate" placeholder="Date" required>
+        <SmallButton @click="createLesson" role="link" buttonName="Create Lesson"></SmallButton>
     </form>
+    </body>
 </template>
 
 <style media="screen">
@@ -57,7 +51,7 @@ body{
     bottom: -80px;
 }
 form{
-    height: 520px;
+    height: 320px;
     width: 400px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
@@ -77,18 +71,6 @@ form *{
     outline: none;
     border: none;
 }
-form h3{
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 42px;
-    text-align: center;
-}
-label{
-    display: block;
-    margin-top: 30px;
-    font-size: 16px;
-    font-weight: 500;
-}
 input{
     display: block;
     height: 50px;
@@ -99,9 +81,6 @@ input{
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
-}
-::placeholder{
-    color: #e5e5e5;
 }
 button{
     margin-top: 50px;
@@ -114,51 +93,26 @@ button{
     border-radius: 5px;
     cursor: pointer;
 }
-.social{
-  margin-top: 30px;
-  display: flex;
-}
-.social div{
-  background: red;
-  width: 150px;
-  border-radius: 3px;
-  padding: 5px 10px 10px 5px;
-  background-color: rgba(255,255,255,0.27);
-  color: #eaf0fb;
-  text-align: center;
-}
-.social div:hover{
-  background-color: rgba(255,255,255,0.47);
-}
-.social .fb{
-  margin-left: 25px;
-}
-.social i{
-  margin-right: 4px;
-}
-
 </style>
-
+  
 <script>
+
     import SmallButton from '../PageButton/SmallButton.vue'
     import { ref } from 'vue'
 
     export default {
         setup() {
-            const enteredUsername = ref("")
-            const enteredPassword = ref("")
-            const isAuthenticated = ref(false)
+            const enteredLessonNumber = ref("")
+            const enteredDate = ref("")
 
             return {
-                enteredUsername,
-                enteredPassword,
-                isAuthenticated
+                enteredLessonNumber,
+                enteredDate
         }
         },
         mounted() {
-            console.log(this.enteredUsername)
-            console.log(this.enteredPassword)
-            console.log(this.isAuthenticated)
+            console.log(this.enteredLessonNumber)
+            console.log(this.enteredDate)
         },
         data() {
             return {
@@ -169,19 +123,15 @@ button{
             SmallButton
         },
         methods: {
-            verifyUser() {
+            createLesson() {
                 // Send the user object -> Backend -> Database
                 // Database -> Backend -> Return response
                 // TODO: AUTH USER AGAINST API HERE
                 console.log("I've been pressed, yo!");
-                if (this.enteredUsername == "aaa" && this.enteredPassword == "qqq") {
-                    console.log("LOGGED IN!");
-                    this.$router.push({name: 'home'});
-                }
-                else {
-                    console.log("NOT CORRECT!");
-                }
+                const date = new Date();
+                console.log("Current Date: " + date);
             }
         }
     };
+
 </script>
