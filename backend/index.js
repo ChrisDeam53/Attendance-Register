@@ -186,7 +186,7 @@ async function createDummyData() {
     const lect5id = lect5.id;
 
     const lecturer6 = Lecturer.build({
-        User: { firstName: "Traci", lastName: "Elissa", username: "nb29498382", password: "test123" }
+        User: { firstName: "Traci", lastName: "Elissa", username: "te323382", password: "test123" }
     }, { include: [User] });
     lecturer6.save();
 
@@ -194,7 +194,7 @@ async function createDummyData() {
     const lect6id = lect6.id;
 
     const lecturer7 = Lecturer.build({
-        User: { firstName: "Connell", lastName: "Mabelle", username: "nb29498382", password: "test123" }
+        User: { firstName: "Connell", lastName: "Mabelle", username: "cm2098309", password: "test123" }
     }, { include: [User] });
     lecturer7.save();
 
@@ -203,7 +203,7 @@ async function createDummyData() {
 
 
     const lecturer8 = Lecturer.build({
-        User: { firstName: "Madge", lastName: "Gerald", username: "nb29498382", password: "test123" }
+        User: { firstName: "Madge", lastName: "Gerald", username: "mg29432323", password: "test123" }
     }, { include: [User] });
     lecturer8.save();
 
@@ -213,7 +213,7 @@ async function createDummyData() {
 
 
     const lecturer9 = Lecturer.build({
-        User: { firstName: "Enid", lastName: "Reagan", username: "nb29498382", password: "test123" }
+        User: { firstName: "Enid", lastName: "Reagan", username: "er398309283", password: "test123" }
     }, { include: [User] });
     lecturer9.save();
 
@@ -296,7 +296,7 @@ async function createDummyData() {
 }
 
 //Do not run this command if the database does not already exist -IMPORTANT-
-createDummyData();
+//createDummyData();
 
 
 async function clearTables() {
