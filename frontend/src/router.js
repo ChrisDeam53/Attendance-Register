@@ -6,28 +6,28 @@ const routes = [
         alias: "/loginScreen",
         name: "loginScreen",
         meta: { requiredAuth: false},
-        component: () => import("../components/Login/LoginScreen")
+        component: () => import("./components/Login/LoginScreen")
     },
     {
         path: "/tableView",
         alias: "/tableView",
         name: "tableView",
         meta: { requiredAuth: true},
-        component: () => import("../components/TableScreen")
+        component: () => import("./components/TableScreen")
     },
     {
         path: "/pieView",
         alias: "/piewView",
         name: "pieView",
         meta: { requiredAuth: true},
-        component: () => import("../components/VisualiseAttendance")
+        component: () => import("./components/VisualiseAttendance")
     },
     {
         path: "/home",
         alias: "/home",
         name: "home",
         meta: { requiredAuth: true},
-        component: () => import("../components/HomePage")
+        component: () => import("./components/HomePage")
     }
 ];
 
