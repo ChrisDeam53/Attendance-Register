@@ -18,7 +18,7 @@ const routes = [
     {
         path: "/visualiseAttendance",
         alias: "/visualiseAttendance",
-        name: "pieView",
+        name: "visualiseAttendance",
         meta: { requiredAuth: true},
         component: () => import("./components/VisualiseAttendance")
     },

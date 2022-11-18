@@ -24,6 +24,11 @@
     components: {
         Doughnut: vueChart.Doughnut
     },
+    methods: {
+            // async getAttendance() {
+            //     this.modules = await axios.get('/api/attendance')
+            // }
+        },
     props: {
         chartId: {
             type: String,

@@ -139,6 +139,7 @@ h2 a {
     export default {
         data() {
             return {
+                // TEMPORARY DATA
                 modules: [
                 { id: 'Module 1', name: '123', handle: 'Drew Durnill' },
                 { id: 'Module 2', name: '456', handle: 'Tommy Kay' },
@@ -157,8 +158,10 @@ h2 a {
                 else {
                     console.log("ID IS: " + moduleID);
                 }
-            }
-
+            },
+            // async getPosts() {
+            //     this.modules = await axios.get('/api/modules')
+            // }
         },
         name: "TableView",
             components: {

@@ -156,7 +156,10 @@ h2 a {
             },
             editStudentData(studentID) {
                 console.log("Student First Name: " + studentID);
-            }
+            },
+            // async getLessons() {
+            //     this.modules = await axios.get('/api/lessons')
+            // }
 
         },
         components: {
