@@ -11,7 +11,8 @@
    export default {
     name: 'new-pet',
     components: {
-    //   'lesson-form': newLessonForm
+      // TODO
+      // 'lesson-form': newLessonForm
     },
     methods: {
       createOrUpdate: async function(pet) {
