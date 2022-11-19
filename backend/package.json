@@ -17,7 +17,7 @@
   "scripts": {
   
     
-  "start": "node server.js",
+  "start": "./bin/www",
   
     
   "test": "mocha --timeout 5000 --exit"
