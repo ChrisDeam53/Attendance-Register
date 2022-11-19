@@ -9,7 +9,7 @@
   "scripts": {
   
     
-  "start": "./bin/www",
+  "start": "node ./bin/www",
   
     
   "test": "mocha --timeout 5000 --exit"
